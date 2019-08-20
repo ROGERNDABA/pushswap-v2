@@ -6,7 +6,7 @@
 /*   By: Roger Ndaba <rogerndaba@gmil.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 13:48:59 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/07/17 19:35:20 by Roger Ndaba      ###   ########.fr       */
+/*   Updated: 2019/08/20 20:53:44 by Roger Ndaba      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdlib.h>
 
 # include "get_next_line.h"
 
