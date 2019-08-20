@@ -13,7 +13,7 @@ void	free_double_arr(void ***arr)
 	free(tmp_arr);
 }
 
-void	normalize_argv(int ac, char ***av) {
+void	normalize_argv(int *ac, char ***av) {
 	char	**tmp_av;
 	char	**split;
 	char	*new_av;
@@ -22,11 +22,16 @@ void	normalize_argv(int ac, char ***av) {
 	tmp_av = *av;
 	new_av = (char *)malloc(65535);
 	i = 0;
-	while (++i < ac) {
+	while (++i < *ac) {
 		new_av = ft_strcat(new_av, " ");
 		new_av = ft_strcat(new_av, tmp_av[i]);
 	}
 	*av = ft_strsplit(new_av, ' ');
+	tmp_av = *av;
+	i = 0;
+	while (tmp_av[i])
+		i++;
+	*ac = i;
 	free(new_av);
 }
 
@@ -58,8 +63,8 @@ void build_stacks(int **stack_a, int **stack_b, char ***av, int ac) {
 
 int main(int ac, char **av)
 {
-	normalize_argv(ac, &av);
-	ac--;
+	normalize_argv(&ac, &av);
+
 	int *a;
 	int *b;
 
@@ -72,8 +77,5 @@ int main(int ac, char **av)
 	free_double_arr((void ***)&av);
 	free(a);
 	free(b);
-
-	// int *stack_a = (int *)malloc(sizeof(int) * 10);
-	/* code */
 	return 0;
 }
