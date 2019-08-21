@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instructions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+        */
+/*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/21 11:02:13 by Roger Ndaba       #+#    #+#             */
-/*   Updated: 2019/08/21 13:36:25 by Roger Ndaba      ###   ########.fr       */
+/*   Created: 2019/08/21 11:02:13 by rmdaba            #+#    #+#             */
+/*   Updated: 2019/08/21 15:03:30 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

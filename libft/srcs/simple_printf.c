@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_printf.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+        */
+/*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/21 14:07:12 by Roger Ndaba       #+#    #+#             */
-/*   Updated: 2019/08/21 14:45:51 by Roger Ndaba      ###   ########.fr       */
+/*   Created: 2019/08/21 14:07:12 by rmdaba            #+#    #+#             */
+/*   Updated: 2019/08/21 15:02:44 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
