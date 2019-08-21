@@ -125,35 +125,6 @@ void trim(char **str)
 	}
 }
 
-// int		proccess_moves(char *line, t_checker **t_c)
-// {
-// 	if (!ft_strcmp("sa", line))
-// 		sa(&(**t_c), 0);
-// 	else if (!ft_strcmp("sb", line))
-// 		sb(&(**t_c), 0);
-// 	else if (!ft_strcmp("ss", line))
-// 		ss(&(**t_c), 0);
-// 	else if (!ft_strcmp("pa", line))
-// 		pa(&(**t_c), 0);
-// 	else if (!ft_strcmp("pb", line))
-// 		pb(&(**t_c), 0);
-// 	else if (!ft_strcmp("ra", line))
-// 		ra(&(**t_c), 0);
-// 	else if (!ft_strcmp("rb", line))
-// 		rb(&(**t_c), 0);
-// 	else if (!ft_strcmp("rr", line))
-// 		rr(&(**t_c), 0);
-// 	else if (!ft_strcmp("rra", line))
-// 		rra(&(**t_c), 0);
-// 	else if (!ft_strcmp("rrb", line))
-// 		rrb(&(**t_c), 0);
-// 	else if (!ft_strcmp("rrr", line))
-// 		rrr(&(**t_c), 0);
-// 	else
-// 		return (0);
-// 	return (1);
-// }
-
 void init_moves(t_moves **tmp)
 {
 	*tmp = (t_moves *)malloc(sizeof(t_moves) * 11);
@@ -179,18 +150,6 @@ void init_moves(t_moves **tmp)
 	(*tmp + 9)->name = "rrb";
 	(*tmp + 10)->move_ptr = &rrr;
 	(*tmp + 10)->name = "rrr";
-}
-
-void free_moves(t_moves **tmp)
-{
-	int		i;
-
-	i = 11;
-	while (i-- > -1)
-	{
-		free((*tmp) + i);
-	}
-	*tmp = NULL;
 }
 
 
@@ -219,11 +178,11 @@ void proccess_input(char *line, t_checker *t_c)
 	{
 		free(t_c->s_a);
 		free(t_c->s_b);
-		free_moves(&m);
+		free(m);
 		simple_printf(B_RED"Error\n"RESET);
 		exit(EXIT_FAILURE);
 	}
-	free_moves(&m);
+	free(m);
 }
 
 int main(int ac, char **av)
@@ -240,17 +199,17 @@ int main(int ac, char **av)
 	build_stacks(&t_c, &av, ac);
 	free_double_arr((void ***)&av);
 	simple_print(&t_c);
-	while (get_next_line(1, &line))
+	while (get_next_line(0, &line))
 	{
 		trim(&line);
 		proccess_input(line, &t_c);
 		free(line);
 		simple_print(&t_c);
-		break;
+		// break;
 	}
-
+	printf("lol\n");
 	free(t_c.s_a);
 	free(t_c.s_b);
-	while(1) {}
+	// while(1) {}
 	return 0;
 }

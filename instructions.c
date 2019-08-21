@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instructions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
+/*   By: rmdaba <rogerndaba@gmil.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:02:13 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 15:03:30 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/08/21 18:50:11 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ void	sb(t_checker *t_c, int flag)
 		t_c->s_b[0] = t_c->s_b[1];
 		t_c->s_b[1] = tmp;
 	}
+	if (flag)
+		ft_putstr("sb\n");
 }
 
 void	ss(t_checker *t_c, int flag)
 {
 	sa(&(*t_c), 0);
 	sb(&(*t_c), 0);
+	if (flag)
+		ft_putstr("ss\n");
 }
 
 void	pa(t_checker *t_c, int flag)
@@ -60,6 +64,8 @@ void	pa(t_checker *t_c, int flag)
 		while (++i < t_c->size_b)
 			t_c->s_b[i] = t_c->s_b[i + 1];
 	}
+	if (flag)
+		ft_putstr("pa\n");
 }
 
 void	pb(t_checker *t_c, int flag)
@@ -78,6 +84,8 @@ void	pb(t_checker *t_c, int flag)
 		while (++i < t_c->size_a)
 			t_c->s_a[i] = t_c->s_a[i + 1];
 	}
+	if (flag)
+		ft_putstr("pb\n");
 }
 
 void	ra(t_checker *t_c, int flag)
@@ -93,6 +101,8 @@ void	ra(t_checker *t_c, int flag)
 			t_c->s_a[i] = t_c->s_a[i + 1];
 		t_c->s_a[i] = tmp;
 	}
+	if (flag)
+		ft_putstr("ra\n");
 }
 
 void	rb(t_checker *t_c, int flag)
@@ -108,12 +118,16 @@ void	rb(t_checker *t_c, int flag)
 			t_c->s_b[i] = t_c->s_b[i + 1];
 		t_c->s_b[i] = tmp;
 	}
+	if (flag)
+		ft_putstr("rb\n");
 }
 
 void	rr(t_checker *t_c, int flag)
 {
 	ra(&(*t_c), 0);
 	rb(&(*t_c), 0);
+	if (flag)
+		ft_putstr("rr\n");
 }
 
 void	rra(t_checker *t_c, int flag)
@@ -129,6 +143,8 @@ void	rra(t_checker *t_c, int flag)
 			t_c->s_a[i] = t_c->s_a[i - 1];
 		t_c->s_a[0] = tmp;
 	}
+	if (flag)
+		ft_putstr("rra\n");
 }
 
 void	rrb(t_checker *t_c, int flag)
@@ -144,10 +160,14 @@ void	rrb(t_checker *t_c, int flag)
 			t_c->s_b[i] = t_c->s_b[i - 1];
 		t_c->s_b[0] = tmp;
 	}
+	if (flag)
+		ft_putstr("rrb\n");
 }
 
 void	rrr(t_checker *t_c, int flag)
 {
 	rra(&(*t_c), 0);
 	rrb(&(*t_c), 0);
+	if (flag)
+		ft_putstr("rrr\n");
 }

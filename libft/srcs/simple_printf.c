@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_printf.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
+/*   By: rmdaba <rogerndaba@gmil.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:07:12 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 15:11:03 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/08/21 18:23:11 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*convert(unsigned int num, int base)
 	return (ptr);
 }
 
-void	proc(unsigned int *i, va_list arg, char c, char **s)
+void	proc(int *i, va_list arg, char c, char **s)
 {
 	if (c == 'c')
 	{
@@ -55,7 +55,7 @@ void	proc(unsigned int *i, va_list arg, char c, char **s)
 
 void	simple_printf(char *format, ...)
 {
-	unsigned int	i;
+	int				i;
 	char			*traverse;
 	char			*s;
 	va_list			arg;
