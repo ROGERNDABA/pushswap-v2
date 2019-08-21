@@ -6,15 +6,15 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:04:08 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 15:02:22 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/08/21 16:02:16 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHECKER_H
 # define CHECKER_H
 
-#include <libft.h>
-#include <stdio.h>
+# include <libft.h>
+# include <stdio.h>
 
 typedef struct	s_checker
 {
@@ -23,6 +23,14 @@ typedef struct	s_checker
 	int			size_a;
 	int			size_b;
 }				t_checker;
+
+typedef void	(*t_move_ptr)(t_checker *, int);
+
+typedef	struct	s_moves
+{
+	char		*name;
+	t_move_ptr	move_ptr;
+}				t_moves;
 
 void			sa(t_checker *t_c, int flag);
 void			sb(t_checker *t_c, int flag);
@@ -36,4 +44,4 @@ void			rra(t_checker *t_c, int flag);
 void			rrb(t_checker *t_c, int flag);
 void			rrr(t_checker *t_c, int flag);
 
-#endif //CHECKER_H
+#endif

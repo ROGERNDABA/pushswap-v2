@@ -93,7 +93,7 @@ void build_stacks(t_checker *t_c, char ***av, int ac) {
 			free_double_arr((void ***)&(*av));
 			free(t_c->s_a);
 			free(t_c->s_b);
-			ft_putstr("\033[31mArguments must be integers\033[0m\n");
+			simple_printf(B_RED"Error\n"RESET);
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -109,7 +109,7 @@ void trim(char **str)
 
 	i = 0;
 	tmp = *str;
-	while (ft_isblank(tmp[i]))
+	while (ft_isblank(tmp[++i]))
 		i++;
 	if (ft_isblank(tmp[0]))
 	{
@@ -125,35 +125,106 @@ void trim(char **str)
 	}
 }
 
-int		proccess_input(char *line, t_checker *t_c)
+// int		proccess_moves(char *line, t_checker **t_c)
+// {
+// 	if (!ft_strcmp("sa", line))
+// 		sa(&(**t_c), 0);
+// 	else if (!ft_strcmp("sb", line))
+// 		sb(&(**t_c), 0);
+// 	else if (!ft_strcmp("ss", line))
+// 		ss(&(**t_c), 0);
+// 	else if (!ft_strcmp("pa", line))
+// 		pa(&(**t_c), 0);
+// 	else if (!ft_strcmp("pb", line))
+// 		pb(&(**t_c), 0);
+// 	else if (!ft_strcmp("ra", line))
+// 		ra(&(**t_c), 0);
+// 	else if (!ft_strcmp("rb", line))
+// 		rb(&(**t_c), 0);
+// 	else if (!ft_strcmp("rr", line))
+// 		rr(&(**t_c), 0);
+// 	else if (!ft_strcmp("rra", line))
+// 		rra(&(**t_c), 0);
+// 	else if (!ft_strcmp("rrb", line))
+// 		rrb(&(**t_c), 0);
+// 	else if (!ft_strcmp("rrr", line))
+// 		rrr(&(**t_c), 0);
+// 	else
+// 		return (0);
+// 	return (1);
+// }
+
+void init_moves(t_moves **tmp)
 {
-	if (!ft_strcmp("sa", line))
-		sa(&(*t_c), 0);
-	else if (!ft_strcmp("sb", line))
-		sb(&(*t_c), 0);
-	else if (!ft_strcmp("ss", line))
-		ss(&(*t_c), 0);
-	else if (!ft_strcmp("pa", line))
-		pa(&(*t_c), 0);
-	else if (!ft_strcmp("pb", line))
-		pb(&(*t_c), 0);
-	else if (!ft_strcmp("ra", line))
-		ra(&(*t_c), 0);
-	else if (!ft_strcmp("rb", line))
-		rb(&(*t_c), 0);
-	else if (!ft_strcmp("rr", line))
-		rr(&(*t_c), 0);
-	else if (!ft_strcmp("rra", line))
-		rra(&(*t_c), 0);
-	else if (!ft_strcmp("rrb", line))
-		rrb(&(*t_c), 0);
-	else if (!ft_strcmp("rrr", line))
-		rrr(&(*t_c), 0);
-	else
-		return (0);
-	return (1);
+	*tmp = (t_moves *)malloc(sizeof(t_moves) * 11);
+	(*tmp + 0)->move_ptr = &sa;
+	(*tmp + 0)->name = "sa";
+	(*tmp + 1)->move_ptr = &sb;
+	(*tmp + 1)->name = "sb";
+	(*tmp + 2)->move_ptr = &ss;
+	(*tmp + 2)->name = "ss";
+	(*tmp + 3)->move_ptr = &pa;
+	(*tmp + 3)->name = "pa";
+	(*tmp + 4)->move_ptr = &pb;
+	(*tmp + 4)->name = "pb";
+	(*tmp + 5)->move_ptr = &ra;
+	(*tmp + 5)->name = "ra";
+	(*tmp + 6)->move_ptr = &rb;
+	(*tmp + 6)->name = "rb";
+	(*tmp + 7)->move_ptr = &rr;
+	(*tmp + 7)->name = "rr";
+	(*tmp + 8)->move_ptr = &rra;
+	(*tmp + 8)->name = "rra";
+	(*tmp + 9)->move_ptr = &rrb;
+	(*tmp + 9)->name = "rrb";
+	(*tmp + 10)->move_ptr = &rrr;
+	(*tmp + 10)->name = "rrr";
 }
 
+void free_moves(t_moves **tmp)
+{
+	int		i;
+
+	i = 11;
+	while (i-- > -1)
+	{
+		free((*tmp) + i);
+	}
+	*tmp = NULL;
+}
+
+
+int		make_move(char *str, t_moves *tmp, t_checker **t_c)
+{
+	int		i;
+
+	i = -1;
+	while (++i < 11)
+	{
+		if (!ft_strcmp(str, (tmp + i)->name))
+		{
+			(tmp + i)->move_ptr(&(**t_c), 0);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+void proccess_input(char *line, t_checker *t_c)
+{
+	t_moves		*m;
+
+	init_moves(&m);
+	if (!make_move(line, m, &t_c))
+	{
+		free(t_c->s_a);
+		free(t_c->s_b);
+		free_moves(&m);
+		simple_printf(B_RED"Error\n"RESET);
+		exit(EXIT_FAILURE);
+	}
+	free_moves(&m);
+}
 
 int main(int ac, char **av)
 {
@@ -161,26 +232,25 @@ int main(int ac, char **av)
 	char		*line;
 	int			line_nbr;
 
+
 	normalize_argv(&ac, &av);
 	t_c.size_a = ac;
 	t_c.size_b = 0;
 	line_nbr = 0;
 	build_stacks(&t_c, &av, ac);
+	free_double_arr((void ***)&av);
 	simple_print(&t_c);
 	while (get_next_line(1, &line))
 	{
 		trim(&line);
-		if (!proccess_input(line, &t_c))
-		{
-			simple_printf("Line %d: Invalid instruction\n", ++line_nbr);
-			break;
-		}
-		simple_print(&t_c);
+		proccess_input(line, &t_c);
 		free(line);
+		simple_print(&t_c);
+		break;
 	}
 
-	free_double_arr((void ***)&av);
 	free(t_c.s_a);
 	free(t_c.s_b);
+	while(1) {}
 	return 0;
 }
