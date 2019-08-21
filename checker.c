@@ -125,6 +125,11 @@ void trim(char **str)
 	}
 }
 
+void	proccess_input(char *line, t_checker *t_c)
+{
+
+}
+
 
 int main(int ac, char **av)
 {
@@ -139,14 +144,12 @@ int main(int ac, char **av)
 	while (get_next_line(1, &line))
 	{
 		trim(&line);
-		printf("|%s|\n", line);
+		proccess_input(line, &t_c);
 		free(line);
-		break;
 	}
 
 	free_double_arr((void ***)&av);
 	free(t_c.s_a);
 	free(t_c.s_b);
-	while(1){}
 	return 0;
 }
