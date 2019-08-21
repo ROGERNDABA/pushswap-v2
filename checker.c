@@ -8,7 +8,7 @@ void simple_print(t_checker *t_c){
 	printf("\033[32m\nstack b : ");
 	for (size_t i = 0; i < t_c->size_b; i++)
 		printf(" %d", t_c->s_b[i]);
-	printf("\n\n\033[0m");
+	printf("\033[0m\n\n");
 }
 
 void print_stacks(t_checker *t_c)
@@ -125,9 +125,33 @@ void trim(char **str)
 	}
 }
 
-void	proccess_input(char *line, t_checker *t_c)
+int		proccess_input(char *line, t_checker *t_c)
 {
-
+	if (!ft_strcmp("sa", line))
+		sa(&(*t_c), 0);
+	else if (!ft_strcmp("sb", line))
+		sb(&(*t_c), 0);
+	else if (!ft_strcmp("ss", line))
+		ss(&(*t_c), 0);
+	else if (!ft_strcmp("pa", line))
+		pa(&(*t_c), 0);
+	else if (!ft_strcmp("pb", line))
+		pb(&(*t_c), 0);
+	else if (!ft_strcmp("ra", line))
+		ra(&(*t_c), 0);
+	else if (!ft_strcmp("rb", line))
+		rb(&(*t_c), 0);
+	else if (!ft_strcmp("rr", line))
+		rr(&(*t_c), 0);
+	else if (!ft_strcmp("rra", line))
+		rra(&(*t_c), 0);
+	else if (!ft_strcmp("rrb", line))
+		rrb(&(*t_c), 0);
+	else if (!ft_strcmp("rrr", line))
+		rrr(&(*t_c), 0);
+	else
+		return (0);
+	return (1);
 }
 
 
@@ -135,16 +159,23 @@ int main(int ac, char **av)
 {
 	t_checker	t_c;
 	char		*line;
+	int			line_nbr;
 
 	normalize_argv(&ac, &av);
 	t_c.size_a = ac;
 	t_c.size_b = 0;
+	line_nbr = 0;
 	build_stacks(&t_c, &av, ac);
 	simple_print(&t_c);
 	while (get_next_line(1, &line))
 	{
 		trim(&line);
-		proccess_input(line, &t_c);
+		if (!proccess_input(line, &t_c))
+		{
+			simple_printf("Line %d: Invalid instruction\n", ++line_nbr);
+			break;
+		}
+		simple_print(&t_c);
 		free(line);
 	}
 

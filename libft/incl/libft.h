@@ -6,7 +6,7 @@
 /*   By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 13:48:59 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 13:25:46 by Roger Ndaba      ###   ########.fr       */
+/*   Updated: 2019/08/21 14:51:46 by Roger Ndaba      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,25 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 # include "get_next_line.h"
 
 # define BUFF_SIZE_C 4096
+
+# define RED "\033[0;31m"
+# define B_RED "\033[1;31m"
+# define GREEN "\033[0;32m"
+# define B_GREEN "\033[1;32m"
+# define YELLOW "\033[0;33m"
+# define B_YELLOW "\033[01;33m"
+# define BLUE "\033[0;34m"
+# define B_BLUE "\033[1;34m"
+# define MAGENTA "\033[0;35m"
+# define B_MAGENTA "\033[1;35m"
+# define CYAN "\033[0;36m"
+# define B_CYAN "\033[1;36m"
+# define RESET "\033[0m"
 
 size_t				ft_strlen(const char *s);
 int					ft_numlen(int n);
@@ -81,6 +96,8 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_getchar(void);
+
+void				simple_printf(char* format, ...);
 
 typedef struct		s_list
 {

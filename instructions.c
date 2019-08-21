@@ -6,13 +6,13 @@
 /*   By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:02:13 by Roger Ndaba       #+#    #+#             */
-/*   Updated: 2019/08/21 12:21:11 by Roger Ndaba      ###   ########.fr       */
+/*   Updated: 2019/08/21 13:36:25 by Roger Ndaba      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <checker.h>
 
-void	sa(t_checker *t_c)
+void	sa(t_checker *t_c, int flag)
 {
 	int		tmp;
 
@@ -22,9 +22,11 @@ void	sa(t_checker *t_c)
 		t_c->s_a[0] = t_c->s_a[1];
 		t_c->s_a[1] = tmp;
 	}
+	if (flag)
+		ft_putstr("sa\n");
 }
 
-void	sb(t_checker *t_c)
+void	sb(t_checker *t_c, int flag)
 {
 	int		tmp;
 
@@ -36,13 +38,13 @@ void	sb(t_checker *t_c)
 	}
 }
 
-void	ss(t_checker *t_c)
+void	ss(t_checker *t_c, int flag)
 {
-	sa(&(*t_c));
-	sb(&(*t_c));
+	sa(&(*t_c), 0);
+	sb(&(*t_c), 0);
 }
 
-void	pa(t_checker *t_c)
+void	pa(t_checker *t_c, int flag)
 {
 	int		i;
 
@@ -60,7 +62,7 @@ void	pa(t_checker *t_c)
 	}
 }
 
-void	pb(t_checker *t_c)
+void	pb(t_checker *t_c, int flag)
 {
 	int		i;
 
@@ -78,7 +80,7 @@ void	pb(t_checker *t_c)
 	}
 }
 
-void	ra(t_checker *t_c)
+void	ra(t_checker *t_c, int flag)
 {
 	int		tmp;
 	int		i;
@@ -93,7 +95,7 @@ void	ra(t_checker *t_c)
 	}
 }
 
-void	rb(t_checker *t_c)
+void	rb(t_checker *t_c, int flag)
 {
 	int		tmp;
 	int		i;
@@ -108,13 +110,13 @@ void	rb(t_checker *t_c)
 	}
 }
 
-void	rr(t_checker *t_c)
+void	rr(t_checker *t_c, int flag)
 {
-	ra(&(*t_c));
-	rb(&(*t_c));
+	ra(&(*t_c), 0);
+	rb(&(*t_c), 0);
 }
 
-void	rra(t_checker *t_c)
+void	rra(t_checker *t_c, int flag)
 {
 	int		tmp;
 	int		i;
@@ -129,7 +131,7 @@ void	rra(t_checker *t_c)
 	}
 }
 
-void	rrb(t_checker *t_c)
+void	rrb(t_checker *t_c, int flag)
 {
 	int		tmp;
 	int		i;
@@ -144,8 +146,8 @@ void	rrb(t_checker *t_c)
 	}
 }
 
-void	rrr(t_checker *t_c)
+void	rrr(t_checker *t_c, int flag)
 {
-	rra(&(*t_c));
-	rrb(&(*t_c));
+	rra(&(*t_c), 0);
+	rrb(&(*t_c), 0);
 }
