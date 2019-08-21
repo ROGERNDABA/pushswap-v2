@@ -152,6 +152,49 @@ void init_moves(t_moves **tmp)
 	(*tmp + 10)->name = "rrr";
 }
 
+void	insertion_sort(int **stack, int n)
+{
+    int		i;
+	int		key;
+	int		j;
+	int		*arr;
+
+	arr = *stack;
+	i = -1;
+	while (++i < n)
+	{
+		key = arr[i];
+		j = i - 1;
+		while (j >= 0 && arr[j] > key)
+		{
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = key;
+	}
+}
+
+int		check_sorted(t_checker t_c)
+{
+	int		*new_arr;
+	int		i;
+
+	if (t_c.size_b > 0)
+		return (0);
+	i = -1;
+	new_arr = (int *)malloc(sizeof(int) * t_c.size_a);
+	while (++i < t_c.size_a)
+		new_arr[i] = t_c.s_a[i];
+	insertion_sort(&new_arr, t_c.size_a);
+	while (--i > -1)
+		if (new_arr[i] != t_c.s_a[i])
+		{
+			free(new_arr);
+			return (0);
+		}
+	return (1);
+}
+
 
 int		make_move(char *str, t_moves *tmp, t_checker **t_c)
 {
@@ -168,6 +211,8 @@ int		make_move(char *str, t_moves *tmp, t_checker **t_c)
 	}
 	return (0);
 }
+
+
 
 void proccess_input(char *line, t_checker *t_c)
 {
@@ -207,7 +252,8 @@ int main(int ac, char **av)
 		simple_print(&t_c);
 		// break;
 	}
-	printf("lol\n");
+	simple_printf((check_sorted(t_c)) ? "OK\n" : "KO\n");
+	// printf("lol\n");
 	free(t_c.s_a);
 	free(t_c.s_b);
 	// while(1) {}
