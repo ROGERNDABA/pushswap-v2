@@ -6,7 +6,7 @@
 /*   By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 13:48:59 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 10:45:24 by Roger Ndaba      ###   ########.fr       */
+/*   Updated: 2019/08/21 13:25:46 by Roger Ndaba      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const	*s2);
+char				*ft_strjoin_free1(char *s1, char const	*s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 size_t				ft_strspn(const char *s1, const char *s2);

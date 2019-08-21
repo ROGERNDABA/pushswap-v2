@@ -117,8 +117,9 @@ void trim(char **str)
 		i--;
 		while (ft_isprint(tmp[++i]))
 			tmp[++j] = tmp[i];
-		tmp[++j] = '\0';
-		while (ft_isblank(tmp[--j]));
+		tmp[j + 1] = '\0';
+		while (ft_isblank(tmp[j]))
+			j--;
 		tmp[++j] = '\0';
 		*str = tmp;
 	}
@@ -137,15 +138,15 @@ int main(int ac, char **av)
 	simple_print(&t_c);
 	while (get_next_line(1, &line))
 	{
-
 		trim(&line);
 		printf("|%s|\n", line);
 		free(line);
+		break;
 	}
 
 	free_double_arr((void ***)&av);
 	free(t_c.s_a);
 	free(t_c.s_b);
-	// while(1){}
+	while(1){}
 	return 0;
 }

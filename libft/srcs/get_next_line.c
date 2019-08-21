@@ -6,11 +6,12 @@
 /*   By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 09:49:39 by Roger Ndaba       #+#    #+#             */
-/*   Updated: 2019/07/23 09:50:21 by Roger Ndaba      ###   ########.fr       */
+/*   Updated: 2019/08/21 13:26:09 by Roger Ndaba      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/get_next_line.h"
+#include <stdio.h>
 #define MAX_SIZE_FD 100
 
 char			*ft_stock_the_new_line(char *str)
@@ -69,7 +70,7 @@ int				get_next_line(const int fd, char **line)
 		if (ret == -1)
 			return (-1);
 		buff[ret] = '\0';
-		new = ft_strjoin(new, buff);
+		new = ft_strjoin_free1(new, buff);
 		if (ret == 0 && *new == '\0')
 			return (0);
 		if (ret == 0)
