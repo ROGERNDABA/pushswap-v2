@@ -1,29 +1,39 @@
-#include <libft.h>
 #include <stdio.h>
+#include <checker.h>
 
-typedef struct	s_checker
-{
-	int			*s_a;
-	int			*s_b;
-	int			size;
-}				t_checker;
+void simple_print(t_checker *t_c){
+	printf("\033[31mstack a : ");
+	for (size_t i = 0; i < t_c->size_a; i++)
+		printf(" %d", t_c->s_a[i]);
+	printf("\033[32m\nstack b : ");
+	for (size_t i = 0; i < t_c->size_b; i++)
+		printf(" %d", t_c->s_b[i]);
+	printf("\n\n\033[0m");
+}
 
-
-
-void print_stacks(int *stack_a, int *stack_b)
+void print_stacks(t_checker *t_c)
 {
 	int		i;
-	int		size;
+	int		j;
 
-	i = -1;
-
+	i = 0;
 	ft_putstr("\033[34mstack a \033[31m|");
 	ft_putstr(" \033[32mstack b\n\033[31m-----------------\033[0m\n");
-	// while ()
-	// {
-	// 	/* code */
-	// }
-
+	while ( i < t_c->size_a || i < t_c->size_b)
+	{
+		j = -1;
+		ft_putstr("\033[34m ");
+		while (++j < (6 - ft_numlen(t_c->s_a[i])))
+			ft_putchar(' ');
+		if (i < t_c->size_a)
+			ft_putnbr(t_c->s_a[i]);
+		ft_putstr("\033[31m | \033[32m");
+		if (i < t_c->size_b)
+			ft_putnbr(t_c->s_b[i]);
+		ft_putstr("\n\033[0m");
+		i++;
+	}
+	ft_putchar('\n');
 }
 
 
@@ -87,31 +97,29 @@ void build_stacks(t_checker *t_c, char ***av, int ac) {
 			exit(EXIT_FAILURE);
 		}
 		else
-		{
 			t_c->s_a[i] = val;
-		}
 	}
-	t_c->size = ac;
 }
 
 
 int main(int ac, char **av)
 {
+	t_checker	t_c;
+	char		*line;
+
 	normalize_argv(&ac, &av);
-
-	t_checker t_c;
-
+	t_c.size_a = ac;
+	t_c.size_b = 0;
 	build_stacks(&t_c, &av, ac);
-	printf("ac = %d\n", ac);
-	// print_stacks(stack_a, stack_b);
-	for (size_t i = 0; i < ac; i++)
+	simple_print(&t_c);
+	while (get_next_line(1, &line))
 	{
-		printf("---> %d|\n", t_c.s_b[i]);
+		free(line);
 	}
+
 	free_double_arr((void ***)&av);
-
-
-	// free(stack_a);
-	// free(stack_b);
+	free(t_c.s_a);
+	free(t_c.s_b);
+	// while(1){}
 	return 0;
 }

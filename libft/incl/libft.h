@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Roger Ndaba <rogerndaba@gmil.com>          +#+  +:+       +#+        */
+/*   By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 13:48:59 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/20 20:53:44 by Roger Ndaba      ###   ########.fr       */
+/*   Updated: 2019/08/21 10:45:24 by Roger Ndaba      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define BUFF_SIZE_C 4096
 
 size_t				ft_strlen(const char *s);
+int					ft_numlen(int n);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);

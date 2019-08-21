@@ -6,7 +6,8 @@
 			"compilerPath": "/usr/bin/clang-6.0",
 			"cStandard": "c11",
 			"cppStandard": "c++17",
-			"includePath": [ "${workspaceFolder}/libft/incl" ]
+			"includePath": [ "${workspaceFolder}/libft/incl",
+			"${workspaceFolder}/**" ]
 		}
 	],
 	"version": 4

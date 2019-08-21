@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Roger Ndaba <rogerndaba@gmil.com>          +#+  +:+       +#+         #
+#    By: Roger Ndaba <rogerndaba@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/21 22:58:58 by rmdaba            #+#    #+#              #
-#    Updated: 2019/07/17 19:45:33 by Roger Ndaba      ###   ########.fr        #
+#    Updated: 2019/08/21 10:45:41 by Roger Ndaba      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS = 	ft_strlen.c ft_atoi.c ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 		ft_iscntrl.c ft_isgraph.c ft_islower.c ft_isspace.c ft_isupper.c \
 		ft_isxdigit.c ft_str_is_alpha.c ft_str_is_lowercase.c \
 		ft_str_is_numeric.c ft_str_is_printable.c ft_str_is_uppercase.c \
-		ft_strcjoin.c ft_memdup.c get_next_line.c
+		ft_strcjoin.c ft_memdup.c get_next_line.c ft_numlen.c
 
 OBJ = 	$(SRC:%.c=%.o)
 
