@@ -101,6 +101,29 @@ void build_stacks(t_checker *t_c, char ***av, int ac) {
 	}
 }
 
+void trim(char **str)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	tmp = *str;
+	while (ft_isblank(tmp[i]))
+		i++;
+	if (ft_isblank(tmp[0]))
+	{
+		j = -1;
+		i--;
+		while (ft_isprint(tmp[++i]))
+			tmp[++j] = tmp[i];
+		tmp[++j] = '\0';
+		while (ft_isblank(tmp[--j]));
+		tmp[++j] = '\0';
+		*str = tmp;
+	}
+}
+
 
 int main(int ac, char **av)
 {
@@ -114,6 +137,9 @@ int main(int ac, char **av)
 	simple_print(&t_c);
 	while (get_next_line(1, &line))
 	{
+
+		trim(&line);
+		printf("|%s|\n", line);
 		free(line);
 	}
 
