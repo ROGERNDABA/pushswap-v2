@@ -1,7 +1,9 @@
-#include <stdio.h>
+#include <global.h>
 
 int main(int ac, char **av)
 {
-	fprintf(stdout, "pb\npa\n");
+	t_checker	t_c;
+
+	normalize_argv(&ac, &av);
 	return 0;
 }
