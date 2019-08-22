@@ -17,7 +17,7 @@ void simple_print(t_checker *t_c){
 // }
 
 
-int dist(int *arr, int size, int value)
+int	dist(int *arr, int size, int value)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ int dist(int *arr, int size, int value)
 	return ((i >= (size/2)) ? 1 : 0);
 }
 
-void	find_alt(int  *arr, int size, int *vals)
+void	find_alt(int *arr, int size, int *vals)
 {
 	int		i;
 
