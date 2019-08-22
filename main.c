@@ -94,7 +94,6 @@ int main(int ac, char **av)
 		build_stacks(&t_c, &av, ac);
 		algo_1(&t_c);
 		// simple_print(&t_c);
-
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);
 		free(t_c.s_b);
