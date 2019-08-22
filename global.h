@@ -18,5 +18,6 @@
 void	normalize_argv(int *ac, char ***av);
 void	free_double_arr(void ***arr);
 void	build_stacks(t_checker *t_c, char ***av, int ac);
+void	insertion_sort(int **array, int n);
 
 #endif

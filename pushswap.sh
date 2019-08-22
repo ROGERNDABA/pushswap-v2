@@ -1,1 +1,1 @@
-gcc main.c global.c instructions.c -I libft/incl -I ./ -L libft -lft -o ps
+gcc main.c global.c instructions.c helpers.c -I libft/incl -I ./ -L libft -lft -o ps

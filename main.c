@@ -1,4 +1,5 @@
 #include <global.h>
+#include <push_swap.h>
 
 void simple_print(t_checker *t_c){
 	printf("\033[31mstack a : ");
@@ -16,10 +17,49 @@ void simple_print(t_checker *t_c){
 // }
 
 
-void algo_1(t_checker *t_c)
+int dist(int *arr, int size, int value)
 {
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		if (arr[i] == value)
+			break;
+	if (i == size)
+		return (1);
+	return ((i >= (size/2)) ? 1 : 0);
 }
 
+int *alt(int  *arr, int n)
+{
+	// int		i;
+
+	// i = -1;
+	// while ()
+	return 1;
+}
+
+void algo_1(t_checker *t_c)
+{
+	int * new_arr;
+
+	copy_arr(&new_arr, t_c->s_a, t_c->size_a);
+	insertion_sort(&new_arr, t_c->size_a);
+	if (dist(t_c->s_a, t_c->size_a, new_arr[t_c->size_a / 2]))
+		while (*(t_c->s_a) != t_c->size_a / 2)
+			rra(&(*t_c), 1);
+	else
+		while (*(t_c->s_a) != t_c->size_a / 2)
+			ra(&(*t_c), 1);
+	ra(&(*t_c), 1);
+	while (t_c->size_a > 1)
+		pb(&(*t_c), 1);
+}
+
+// void	sort_3(t_checker *t_c)
+// {
+// 	if (t_c->s_a[])
+// }
 
 int main(int ac, char **av)
 {
@@ -31,8 +71,8 @@ int main(int ac, char **av)
 		t_c.size_a = ac;
 		t_c.size_b = 0;
 		build_stacks(&t_c, &av, ac);
-		// algo_1(&t_c);
-		simple_print(&t_c);
+		algo_1(&t_c);
+		// simple_print(&t_c);
 		
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);

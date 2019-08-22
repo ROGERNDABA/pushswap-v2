@@ -90,27 +90,6 @@ void init_moves(t_moves **tmp)
 	(*tmp + 10)->name = "rrr";
 }
 
-void	insertion_sort(int **array, int n)
-{
-    int		i;
-	int		key;
-	int		j;
-	int		*arr;
-
-	arr = *array;
-	i = -1;
-	while (++i < n)
-	{
-		key = arr[i];
-		j = i - 1;
-		while (j >= 0 && arr[j] > key)
-		{
-			arr[j + 1] = arr[j];
-			j = j - 1;
-		}
-		arr[j + 1] = key;
-	}
-}
 
 int		check_sorted(t_checker t_c)
 {

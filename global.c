@@ -77,3 +77,25 @@ void	free_double_arr(void ***arr)
 		ft_strdel(&tmp_arr[i]);
 	free(tmp_arr);
 }
+
+void	insertion_sort(int **array, int n)
+{
+    int		i;
+	int		key;
+	int		j;
+	int		*arr;
+
+	arr = *array;
+	i = -1;
+	while (++i < n)
+	{
+		key = arr[i];
+		j = i - 1;
+		while (j >= 0 && arr[j] > key)
+		{
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = key;
+	}
+}
