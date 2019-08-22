@@ -1,6 +1,6 @@
 # pushswap-v2
 
-####To run
+#### To run
 
     install coreutils
     ARG=$(echo $(seq 10 | shuf));./ps $ARG
