@@ -186,6 +186,7 @@ int main(int ac, char **av)
 		trim(&line);
 		if (ft_strcmp(line, ""))
 			proccess_input(line, &t_c);
+		print_stacks(&t_c);
 		free(line);
 	}
 	simple_printf((check_sorted(t_c)) ? B_GREEN"OK\n"RESET : B_RED"KO\n"RESET);
