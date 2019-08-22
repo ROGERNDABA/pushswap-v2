@@ -30,30 +30,51 @@ int dist(int *arr, int size, int value)
 	return ((i >= (size/2)) ? 1 : 0);
 }
 
-int *alt(int  *arr, int n)
+void	find_alt(int  *arr, int size, int *vals)
 {
-	// int		i;
+	int		i;
 
-	// i = -1;
-	// while ()
-	return 1;
+	i = -1;
+	while (++i < size)
+	{
+		if (arr[i] == vals[0])
+			if (i > 0)
+				vals[0] = arr[i - 1];
+	}
+	i = size;
+	while (--i > -1)
+	{
+		if (arr[i] == vals[1])
+			if (i < size - 1)
+				vals[1] = arr[i + 1];
+	}
 }
 
 void algo_1(t_checker *t_c)
 {
-	int * new_arr;
+	int		*new_arr;
+	int		*alt;
+	int		size;
 
 	copy_arr(&new_arr, t_c->s_a, t_c->size_a);
+	size = t_c->size_a;
+	alt = (int *)malloc(sizeof(int) * 2);
 	insertion_sort(&new_arr, t_c->size_a);
-	if (dist(t_c->s_a, t_c->size_a, new_arr[t_c->size_a / 2]))
-		while (*(t_c->s_a) != t_c->size_a / 2)
-			rra(&(*t_c), 1);
-	else
-		while (*(t_c->s_a) != t_c->size_a / 2)
-			ra(&(*t_c), 1);
-	ra(&(*t_c), 1);
-	while (t_c->size_a > 1)
-		pb(&(*t_c), 1);
+	if (!check_sorted(*t_c))
+	{
+		if (dist(t_c->s_a, t_c->size_a, new_arr[t_c->size_a / 2]))
+			while (*(t_c->s_a) != t_c->size_a / 2)
+				rra(&(*t_c), 1);
+		else
+			while (*(t_c->s_a) != t_c->size_a / 2)
+				ra(&(*t_c), 1);
+		ra(&(*t_c), 1);
+		while (t_c->size_a > 1)
+			pb(&(*t_c), 1);
+		alt[0] = t_c->s_a[0];
+		alt[1] = t_c->s_a[t_c->size_a - 1];
+		find_alt(new_arr, size, &(*alt));
+	}
 }
 
 // void	sort_3(t_checker *t_c)
@@ -73,7 +94,7 @@ int main(int ac, char **av)
 		build_stacks(&t_c, &av, ac);
 		algo_1(&t_c);
 		// simple_print(&t_c);
-		
+
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);
 		free(t_c.s_b);
