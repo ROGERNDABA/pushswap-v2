@@ -11,12 +11,6 @@ void simple_print(t_checker *t_c){
 	printf("\033[0m\n\n");
 }
 
-// void test(t_checker *t_c)
-// {
-// 	pb(&(*t_c), 1);
-// }
-
-
 int	dist(int *arr, int size, int value)
 {
 	int		i;
@@ -50,15 +44,24 @@ void	find_alt(int *arr, int size, int *vals)
 	}
 }
 
-void algo_1(t_checker *t_c)
+void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
+{
+	int		*alt;
+
+	alt = (int *)malloc(sizeof(int) * 2);
+	alt[0] = t_c->s_a[0];
+	alt[1] = t_c->s_a[t_c->size_a - 1];
+	find_alt(new_arr, size, &(*alt));
+}
+
+void algo_3(t_checker *t_c)
 {
 	int		*new_arr;
-	int		*alt;
 	int		size;
+	int		best;
 
 	copy_arr(&new_arr, t_c->s_a, t_c->size_a);
 	size = t_c->size_a;
-	alt = (int *)malloc(sizeof(int) * 2);
 	insertion_sort(&new_arr, t_c->size_a);
 	if (!check_sorted(*t_c))
 	{
@@ -71,16 +74,9 @@ void algo_1(t_checker *t_c)
 		ra(&(*t_c), 1);
 		while (t_c->size_a > 1)
 			pb(&(*t_c), 1);
-		alt[0] = t_c->s_a[0];
-		alt[1] = t_c->s_a[t_c->size_a - 1];
-		find_alt(new_arr, size, &(*alt));
+		ps_proccess1(&(*t_c), new_arr, size);
 	}
 }
-
-// void	sort_3(t_checker *t_c)
-// {
-// 	if (t_c->s_a[])
-// }
 
 int main(int ac, char **av)
 {
@@ -92,8 +88,8 @@ int main(int ac, char **av)
 		t_c.size_a = ac;
 		t_c.size_b = 0;
 		build_stacks(&t_c, &av, ac);
-		algo_1(&t_c);
-		// simple_print(&t_c);
+		algo_3(&t_c);
+		simple_print(&t_c);
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);
 		free(t_c.s_b);
