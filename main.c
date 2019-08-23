@@ -24,34 +24,128 @@ int	dist(int *arr, int size, int value)
 	return ((i >= (size/2)) ? 1 : 0);
 }
 
-void	find_alt(int *arr, int size, int *vals)
+int lowest(int *arr, int size)
 {
 	int		i;
+	int		n;
 
 	i = -1;
+	n = arr[0];
 	while (++i < size)
 	{
-		if (arr[i] == vals[0])
-			if (i > 0)
-				vals[0] = arr[i - 1];
+		if (arr[i] < n)
+			n = arr[i];
 	}
-	i = size;
-	while (--i > -1)
+	return (n);
+}
+
+
+int highest(int *arr, int size)
+{
+	int		i;
+	int		n;
+
+	i = -1;
+	n = arr[0];
+	while (++i < size)
 	{
-		if (arr[i] == vals[1])
-			if (i < size - 1)
-				vals[1] = arr[i + 1];
+		if (arr[i] > n)
+			n = arr[i];
 	}
+	return (n);
+}
+
+// void	find_alt(int *arr, t_checker *t_c, int size, int *vals)
+// {
+// 	int		i;
+// 	int		low;
+// 	int		high;
+
+// 	i = -1;
+// 	low = lowest(t_c->s_b, t_c->size_b);
+// 	high = highest(t_c->s_b, t_c->size_b);
+// 	while (++i < size)
+// 	{
+// 		if (arr[i] == vals[0])
+// 			vals[0] = (i > 0) && arr[i - 1];
+// 	}
+// 	i = size;
+// 	while (--i > -1)
+// 	{
+// 		if (arr[i] == vals[1])
+// 			vals[1] = (i < size - 1) && arr[i + 1];
+// 	}
+// }
+
+int		closest(int *arr, int size, int *vals)
+{
+	int		n1;
+	int		n2;
+	int		i;
+
+	// printf("%d  ++++  %d\n", vals[0], vals[1]);
+	i = -1;
+	while (++i < size)
+		if (arr[i] == vals[0])
+		{
+			if (i >= size / 2)
+				n1 = size - i;
+			else
+				n1 = i;
+		}
+		else if (arr[i] == vals[1])
+		{
+			if (i >= size / 2)
+				n2 = size - i;
+			else
+				n2 = i;
+		}
+	return ((n1 < n2) ? vals[0] : vals[1]);
 }
 
 void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 {
 	int		*alt;
+	int		close;
 
 	alt = (int *)malloc(sizeof(int) * 2);
-	alt[0] = t_c->s_a[0];
-	alt[1] = t_c->s_a[t_c->size_a - 1];
-	find_alt(new_arr, size, &(*alt));
+	while (t_c->size_b > 1)
+	{
+		alt[0] = lowest(t_c->s_b, t_c->size_b);
+		alt[1] = highest(t_c->s_b, t_c->size_b);
+		// find_alt(new_arr, &(*t_c), size, &(*alt));
+		close = closest(t_c->s_b, t_c->size_b, alt);
+		if (dist(t_c->s_b, t_c->size_b, close))
+		{
+			while (t_c->s_b[0] != close)
+			{
+				rrb(&(*t_c), 1);
+				// for (size_t i = 0; i < size; i++)
+				// {
+				// 	printf(" %d", new_arr[i]);
+				// }
+
+				// printf("\n--------------> %d\n", close);
+				// exit(1);
+				// simple_print(t_c);
+
+			}
+			pa(&(*t_c), 1);
+			if (t_c->s_a[0] > t_c->s_a[1])
+				ra(&(*t_c), 1);
+		}
+		else
+		{
+			while (t_c->s_b[0] != close)
+
+				rb(&(*t_c), 1);
+			pa(&(*t_c), 1);
+			if (t_c->s_a[0] > t_c->s_a[1])
+				ra(&(*t_c), 1);
+			// printf("--------------> %d\n", close);
+			// simple_print(t_c);
+		}
+	}
 }
 
 void algo_3(t_checker *t_c)
@@ -89,7 +183,7 @@ int main(int ac, char **av)
 		t_c.size_b = 0;
 		build_stacks(&t_c, &av, ac);
 		algo_3(&t_c);
-		simple_print(&t_c);
+		// simple_print(&t_c);
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);
 		free(t_c.s_b);
