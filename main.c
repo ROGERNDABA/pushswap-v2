@@ -55,27 +55,27 @@ int highest(int *arr, int size)
 	return (n);
 }
 
-// void	find_alt(int *arr, t_checker *t_c, int size, int *vals)
-// {
-// 	int		i;
-// 	int		low;
-// 	int		high;
+void	find_alt(int *arr, t_checker *t_c, int size, int *vals)
+{
+	int		i;
+	int		low;
+	int		high;
 
-// 	i = -1;
-// 	low = lowest(t_c->s_b, t_c->size_b);
-// 	high = highest(t_c->s_b, t_c->size_b);
-// 	while (++i < size)
-// 	{
-// 		if (arr[i] == vals[0])
-// 			vals[0] = (i > 0) && arr[i - 1];
-// 	}
-// 	i = size;
-// 	while (--i > -1)
-// 	{
-// 		if (arr[i] == vals[1])
-// 			vals[1] = (i < size - 1) && arr[i + 1];
-// 	}
-// }
+	i = -1;
+	low = lowest(t_c->s_b, t_c->size_b);
+	high = highest(t_c->s_b, t_c->size_b);
+	while (++i < size)
+	{
+		if (arr[i] == vals[0])
+			vals[0] = (i > 0) ? arr[i - 1] : low;
+	}
+	i = size;
+	while (--i > -1)
+	{
+		if (arr[i] == vals[1])
+			vals[1] = (i < size - 1) ? arr[i + 1] : high;
+	}
+}
 
 int		closest(int *arr, int size, int *vals)
 {
@@ -83,7 +83,7 @@ int		closest(int *arr, int size, int *vals)
 	int		n2;
 	int		i;
 
-	// printf("%d  ++++  %d\n", vals[0], vals[1]);
+	printf("%d  ++++  %d\n", vals[0], vals[1]);
 	i = -1;
 	while (++i < size)
 		if (arr[i] == vals[0])
@@ -111,9 +111,9 @@ void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 	alt = (int *)malloc(sizeof(int) * 2);
 	while (t_c->size_b > 1)
 	{
-		alt[0] = lowest(t_c->s_b, t_c->size_b);
-		alt[1] = highest(t_c->s_b, t_c->size_b);
-		// find_alt(new_arr, &(*t_c), size, &(*alt));
+		alt[0] = t_c->s_a[0];
+		alt[1] = t_c->s_a[t_c->size_a - 1];
+		find_alt(new_arr, &(*t_c), size, &(*alt));
 		close = closest(t_c->s_b, t_c->size_b, alt);
 		if (dist(t_c->s_b, t_c->size_b, close))
 		{
@@ -125,9 +125,9 @@ void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 				// 	printf(" %d", new_arr[i]);
 				// }
 
-				// printf("\n--------------> %d\n", close);
+				printf("\n--------------> %d\n", close);
 				// exit(1);
-				// simple_print(t_c);
+				simple_print(t_c);
 
 			}
 			pa(&(*t_c), 1);
@@ -167,7 +167,15 @@ void algo_3(t_checker *t_c)
 				ra(&(*t_c), 1);
 		ra(&(*t_c), 1);
 		while (t_c->size_a > 1)
-			pb(&(*t_c), 1);
+		{
+			if (t_c->s_a[0] > new_arr[size / 2])
+				pb(&(*t_c), 1);
+			else
+			{
+				pb(&(*t_c), 1);
+				rb(&(*t_c), 1);
+			}
+		}
 		ps_proccess1(&(*t_c), new_arr, size);
 	}
 }
