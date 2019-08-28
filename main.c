@@ -79,7 +79,7 @@ int		closest(int *arr, int size, int *vals)
 	int		n2;
 	int		i;
 
-	printf("%d  ++++  %d\n", vals[0], vals[1]);
+	// printf("%d  ++++  %d\n", vals[0], vals[1]);
 	i = -1;
 	while (++i < size)
 		if (arr[i] == vals[0])
@@ -110,21 +110,21 @@ void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 		alt[0] = t_c->s_a[0];
 		alt[1] = t_c->s_a[t_c->size_a - 1];
 		find_alt(new_arr, &(*t_c), size, &(*alt));
-		close = closest(t_c->s_b, t_c->size_b, alt);
 		if (dist(t_c->s_b, t_c->size_b, close))
 		{
 			while (t_c->s_b[0] != close)
 			{
 				rrb(&(*t_c), 1);
-				find_alt(new_arr, &(*t_c), size, &(*alt));
+				// find_alt(new_arr, &(*t_c), size, &(*alt));
+				close = closest(t_c->s_b, t_c->size_b, alt);
 				// for (size_t i = 0; i < size; i++)
 				// {
 				// 	printf(" %d", new_arr[i]);
 				// }
 
-				printf("\n--------------> %d\n", close);
+				// printf("\n--------------> %d\n", close);
 				// exit(1);
-				simple_print(t_c);
+				// simple_print(t_c);
 
 			}
 			pa(&(*t_c), 1);
