@@ -122,7 +122,7 @@ void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 				// 	printf(" %d", new_arr[i]);
 				// }
 
-				printf("\n--------------> %d\n", close);ff
+				printf("\n--------------> %d\n", close);
 				// exit(1);
 				// simple_print(t_c);
 
