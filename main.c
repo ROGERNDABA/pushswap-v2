@@ -32,10 +32,8 @@ int lowest(int *arr, int size)
 	i = -1;
 	n = arr[0];
 	while (++i < size)
-	{
 		if (arr[i] < n)
 			n = arr[i];
-	}
 	return (n);
 }
 
@@ -48,10 +46,8 @@ int highest(int *arr, int size)
 	i = -1;
 	n = arr[0];
 	while (++i < size)
-	{
 		if (arr[i] > n)
 			n = arr[i];
-	}
 	return (n);
 }
 
@@ -120,6 +116,7 @@ void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 			while (t_c->s_b[0] != close)
 			{
 				rrb(&(*t_c), 1);
+				find_alt(new_arr, &(*t_c), size, &(*alt));
 				// for (size_t i = 0; i < size; i++)
 				// {
 				// 	printf(" %d", new_arr[i]);
