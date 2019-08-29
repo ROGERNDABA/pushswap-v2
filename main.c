@@ -139,7 +139,7 @@ void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 			pa(&(*t_c), 1);
 			if (t_c->s_a[0] > t_c->s_a[1])
 				ra(&(*t_c), 1);
-			// printf("--------------> %d\n", close);
+			printf("--------------> %d\n", close);
 			// simple_print(t_c);
 		}
 	}
