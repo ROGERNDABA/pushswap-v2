@@ -62,6 +62,39 @@ void	get_factor(t_checker *t_c)
 		t_c->ftc = 15;
 }
 
+int	in_chunk(t_checker *t_c, int val)
+{
+	int		i;
+
+	i = -1;
+	while (++i < t_c->size / t_c->ftc)
+		if (t_c->srtd[i] == val)
+			return (1);
+	return (0);
+}
+
+void step_1(t_checker *t_c)
+{
+	int track;
+		printf("--> %d\n", t_c->size);
+	if (!check_sorted(*t_c))
+	{
+		while (t_c->size_b < t_c->size / t_c->ftc)
+		{
+			if (in_chunk(&(*t_c), *t_c->s_a))
+				pb(&(*t_c), 1);
+			else
+				ra(&(*t_c), 1);
+			// simple_print(&(*t_c));
+		}
+		// simple_print(&(*t_c));
+
+	} else
+	{
+		printf("sorted!\n");
+	}
+}
+
 int main(int ac, char **av)
 {
 	t_checker	t_c;
@@ -73,12 +106,9 @@ int main(int ac, char **av)
 		t_c.size_b = 0;
 		build_stacks(&t_c, &av, ac);
 		get_factor(&t_c);
-		// algo_3(&t_c);
-		for (int i = 0; i < t_c.size_a; i++)
-		{
-			printf("%d ", t_c.srtd[i]);
-		}
 
+		static int track = 9;
+		step_1(&t_c);
 		// simple_print(&t_c);
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);

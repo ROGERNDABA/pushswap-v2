@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmil.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:39:20 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/07 13:57:19 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/07 14:38:39 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void build_stacks(t_checker *t_c, char ***av, int ac) {
 		else
 			t_c->s_a[i] = val;
 	}
+	t_c->size = t_c->size_a;
 	copy_arr(&t_c->srtd, t_c->s_a, t_c->size_a);
 	insertion_sort(&t_c->srtd, t_c->size_a);
 }

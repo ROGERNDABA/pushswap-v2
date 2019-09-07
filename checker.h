@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmil.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:04:08 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/07 13:29:18 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/07 14:37:48 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_checker
 	int			size_a;
 	int			size_b;
 	int			ftc;
+	int			size;
 	int			*srtd;
 }				t_checker;
 

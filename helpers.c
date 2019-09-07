@@ -17,7 +17,7 @@ int		check_sorted(t_checker t_c)
 	if (t_c.size_b > 0)
 		return (0);
 	i = -1;
-	while (++i > t_c.size_a)
+	while (++i < t_c.size_a)
 		if (t_c.srtd[i] != t_c.s_a[i])
 			return (0);
 	return (1);
