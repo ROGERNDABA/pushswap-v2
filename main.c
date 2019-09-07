@@ -54,8 +54,10 @@ int highest(int *arr, int size)
 
 void	get_factor(t_checker *t_c)
 {
-	if (t_c->size_a <= 200)
-		t_c->ftc = 5;
+	if (t_c->size_a <= 100)
+		t_c->ftc = 3;
+	else if (t_c->size_a <= 200)
+		t_c->ftc = 4;
 	else if (t_c->size_a <= 500)
 		t_c->ftc = 10;
 	else
@@ -75,8 +77,7 @@ int	in_chunk(t_checker *t_c, int val)
 
 void step_1(t_checker *t_c)
 {
-	int track;
-		printf("--> %d\n", t_c->size);
+	static int track;
 	if (!check_sorted(*t_c))
 	{
 		while (t_c->size_b < t_c->size / t_c->ftc)
@@ -85,7 +86,7 @@ void step_1(t_checker *t_c)
 				pb(&(*t_c), 1);
 			else
 				ra(&(*t_c), 1);
-			// simple_print(&(*t_c));
+			simple_print(&(*t_c));
 		}
 		// simple_print(&(*t_c));
 
