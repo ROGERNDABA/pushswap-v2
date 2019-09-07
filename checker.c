@@ -90,29 +90,6 @@ void init_moves(t_moves **tmp)
 	(*tmp + 10)->name = "rrr";
 }
 
-
-int		check_sorted(t_checker t_c)
-{
-	int		*new_arr;
-	int		i;
-
-	if (t_c.size_b > 0)
-		return (0);
-	i = -1;
-	new_arr = (int *)malloc(sizeof(int) * t_c.size_a);
-	while (++i < t_c.size_a)
-		new_arr[i] = t_c.s_a[i];
-	insertion_sort(&new_arr, t_c.size_a);
-	while (--i > -1)
-		if (new_arr[i] != t_c.s_a[i])
-		{
-			free(new_arr);
-			return (0);
-		}
-	return (1);
-}
-
-
 int		make_move(char *str, t_moves *tmp, t_checker **t_c)
 {
 	int		i;
@@ -160,6 +137,12 @@ int main(int ac, char **av)
 	line_nbr = 0;
 	build_stacks(&t_c, &av, ac);
 	free_double_arr((void ***)&av);
+	for (int i = 0; i < t_c.size_a; i++)
+	{
+		printf("%d ", t_c.srtd[i]);
+	}
+	printf("\n");
+
 	while (get_next_line(0, &line))
 	{
 		trim(&line);
@@ -171,5 +154,6 @@ int main(int ac, char **av)
 	simple_printf((check_sorted(t_c)) ? B_GREEN"OK\n"RESET : B_RED"KO\n"RESET);
 	free(t_c.s_a);
 	free(t_c.s_b);
+	free(t_c.srtd);
 	return 0;
 }

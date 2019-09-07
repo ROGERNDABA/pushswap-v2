@@ -145,37 +145,47 @@ void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
 	}
 }
 
-void algo_3(t_checker *t_c)
+void	get_factor(t_checker *t_c)
 {
-	int		*new_arr;
-	int		size;
-	int		best;
-
-	copy_arr(&new_arr, t_c->s_a, t_c->size_a);
-	size = t_c->size_a;
-	insertion_sort(&new_arr, t_c->size_a);
-	if (!check_sorted(*t_c))
-	{
-		if (dist(t_c->s_a, t_c->size_a, new_arr[t_c->size_a / 2]))
-			while (*(t_c->s_a) != t_c->size_a / 2)
-				rra(&(*t_c), 1);
-		else
-			while (*(t_c->s_a) != t_c->size_a / 2)
-				ra(&(*t_c), 1);
-		ra(&(*t_c), 1);
-		while (t_c->size_a > 1)
-		{
-			if (t_c->s_a[0] > new_arr[size / 2])
-				pb(&(*t_c), 1);
-			else
-			{
-				pb(&(*t_c), 1);
-				rb(&(*t_c), 1);
-			}
-		}
-		ps_proccess1(&(*t_c), new_arr, size);
-	}
+	if (t_c->size_a <= 200)
+		t_c->ftc = 5;
+	else if (t_c->size_a <= 500)
+		t_c->ftc = 10;
+	else
+		t_c->ftc = 15;
 }
+
+// void algo_3(t_checker *t_c)
+// {
+// 	int		*new_arr;
+// 	int		size;
+// 	int		best;
+
+// 	copy_arr(&new_arr, t_c->s_a, t_c->size_a);
+// 	size = t_c->size_a;
+// 	insertion_sort(&new_arr, t_c->size_a);
+// 	if (!check_sorted(*t_c))
+// 	{
+// 		if (dist(t_c->s_a, t_c->size_a, new_arr[t_c->size_a / 2]))
+// 			while (*(t_c->s_a) != t_c->size_a / 2)
+// 				rra(&(*t_c), 1);
+// 		else
+// 			while (*(t_c->s_a) != t_c->size_a / 2)
+// 				ra(&(*t_c), 1);
+// 		ra(&(*t_c), 1);
+// 		while (t_c->size_a > 1)
+// 		{
+// 			if (t_c->s_a[0] > new_arr[size / 2])
+// 				pb(&(*t_c), 1);
+// 			else
+// 			{
+// 				pb(&(*t_c), 1);
+// 				rb(&(*t_c), 1);
+// 			}
+// 		}
+// 		ps_proccess1(&(*t_c), new_arr, size);
+// 	}
+// }
 
 int main(int ac, char **av)
 {
@@ -187,7 +197,13 @@ int main(int ac, char **av)
 		t_c.size_a = ac;
 		t_c.size_b = 0;
 		build_stacks(&t_c, &av, ac);
-		algo_3(&t_c);
+		get_factor(&t_c);
+		// algo_3(&t_c);
+		for (int i = 0; i < t_c.size_a; i++)
+		{
+			printf("%d ", t_c.srtd[i]);
+		}
+
 		// simple_print(&t_c);
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);

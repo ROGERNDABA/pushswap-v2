@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmil.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 19:38:09 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 19:46:09 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/07 13:31:27 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GLOBAL_H
 
 # include <checker.h>
+# include <push_swap.h>
 
 void	normalize_argv(int *ac, char ***av);
 void	free_double_arr(void ***arr);
