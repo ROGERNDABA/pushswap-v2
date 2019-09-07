@@ -51,99 +51,6 @@ int highest(int *arr, int size)
 	return (n);
 }
 
-void	find_alt(int *arr, t_checker *t_c, int size, int *vals)
-{
-	int		i;
-	int		low;
-	int		high;
-
-	i = -1;
-	low = lowest(t_c->s_b, t_c->size_b);
-	high = highest(t_c->s_b, t_c->size_b);
-	while (++i < size)
-	{
-		if (arr[i] == vals[0])
-			vals[0] = (i > 0) ? arr[i - 1] : low;
-	}
-	i = size;
-	while (--i > -1)
-	{
-		if (arr[i] == vals[1])
-			vals[1] = (i < size - 1) ? arr[i + 1] : high;
-	}
-}
-
-int		closest(int *arr, int size, int *vals)
-{
-	int		n1;
-	int		n2;
-	int		i;
-
-	// printf("%d  ++++  %d\n", vals[0], vals[1]);
-	i = -1;
-	while (++i < size)
-		if (arr[i] == vals[0])
-		{
-			if (i >= size / 2)
-				n1 = size - i;
-			else
-				n1 = i;
-		}
-		else if (arr[i] == vals[1])
-		{
-			if (i >= size / 2)
-				n2 = size - i;
-			else
-				n2 = i;
-		}
-	return ((n1 < n2) ? vals[0] : vals[1]);
-}
-
-void	ps_proccess1(t_checker *t_c, int *new_arr, int size)
-{
-	int		*alt;
-	int		close;
-
-	alt = (int *)malloc(sizeof(int) * 2);
-	while (t_c->size_b > 1)
-	{
-		alt[0] = t_c->s_a[0];
-		alt[1] = t_c->s_a[t_c->size_a - 1];
-		find_alt(new_arr, &(*t_c), size, &(*alt));
-		if (dist(t_c->s_b, t_c->size_b, close))
-		{
-			while (t_c->s_b[0] != close)
-			{
-				rrb(&(*t_c), 1);
-				// find_alt(new_arr, &(*t_c), size, &(*alt));
-				close = closest(t_c->s_b, t_c->size_b, alt);
-				// for (size_t i = 0; i < size; i++)
-				// {
-				// 	printf(" %d", new_arr[i]);
-				// }
-
-				printf("\n--------------> %d\n", close);
-				// exit(1);
-				// simple_print(t_c);
-
-			}
-			pa(&(*t_c), 1);
-			if (t_c->s_a[0] > t_c->s_a[1])
-				ra(&(*t_c), 1);
-		}
-		else
-		{
-			while (t_c->s_b[0] != close)
-
-				rb(&(*t_c), 1);
-			pa(&(*t_c), 1);
-			if (t_c->s_a[0] > t_c->s_a[1])
-				ra(&(*t_c), 1);
-			printf("--------------> %d\n", close);
-			// simple_print(t_c);
-		}
-	}
-}
 
 void	get_factor(t_checker *t_c)
 {
@@ -154,38 +61,6 @@ void	get_factor(t_checker *t_c)
 	else
 		t_c->ftc = 15;
 }
-
-// void algo_3(t_checker *t_c)
-// {
-// 	int		*new_arr;
-// 	int		size;
-// 	int		best;
-
-// 	copy_arr(&new_arr, t_c->s_a, t_c->size_a);
-// 	size = t_c->size_a;
-// 	insertion_sort(&new_arr, t_c->size_a);
-// 	if (!check_sorted(*t_c))
-// 	{
-// 		if (dist(t_c->s_a, t_c->size_a, new_arr[t_c->size_a / 2]))
-// 			while (*(t_c->s_a) != t_c->size_a / 2)
-// 				rra(&(*t_c), 1);
-// 		else
-// 			while (*(t_c->s_a) != t_c->size_a / 2)
-// 				ra(&(*t_c), 1);
-// 		ra(&(*t_c), 1);
-// 		while (t_c->size_a > 1)
-// 		{
-// 			if (t_c->s_a[0] > new_arr[size / 2])
-// 				pb(&(*t_c), 1);
-// 			else
-// 			{
-// 				pb(&(*t_c), 1);
-// 				rb(&(*t_c), 1);
-// 			}
-// 		}
-// 		ps_proccess1(&(*t_c), new_arr, size);
-// 	}
-// }
 
 int main(int ac, char **av)
 {
