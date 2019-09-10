@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:40 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/10 19:36:53 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/10 19:51:16 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void print_stacks(t_checker *t_c)
 	int j;
 
 	i = 0;
-	ft_putstr("\033[34mstack a \033[31m|");
-	ft_putstr(" \033[32mstack b\n\033[31m-----------------\033[0m\n");
+	simple_printf(CYAN "     stack a " RED "| " GREEN "stack b\n");
+	simple_printf(RED "---------------------------" RESET "\n");
 	while (i < t_c->size_a || i < t_c->size_b)
 	{
 		j = -1;
 		ft_putstr("\033[34m ");
-		while (++j < (6 - ft_numlen(t_c->s_a[i])))
+		while (++j < (11 - ft_numlen(t_c->s_a[i])))
 			ft_putchar(' ');
 		if (i < t_c->size_a)
 			ft_putnbr(t_c->s_a[i]);
