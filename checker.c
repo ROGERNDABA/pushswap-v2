@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmdaba <rogerndaba@gmil.com>               +#+  +:+       +#+        */
+/*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:40 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/10 19:08:43 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/10 19:20:34 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <global.h>
 
-void simple_print(t_checker *t_c){
+void simple_print(t_checker *t_c)
+{
 	printf("\033[31mstack a : ");
 	for (size_t i = 0; i < t_c->size_a; i++)
 		printf(" %d", t_c->s_a[i]);
@@ -25,18 +26,21 @@ void simple_print(t_checker *t_c){
 
 void print_stacks(t_checker *t_c)
 {
-	int		i;
-	int		j;
+	int i;
+	int j;
 
 	i = 0;
 	ft_putstr("\033[34mstack a \033[31m|");
 	ft_putstr(" \033[32mstack b\n\033[31m-----------------\033[0m\n");
-	while ( i < t_c->size_a || i < t_c->size_b)
+	while (i < t_c->size_a || i < t_c->size_b)
 	{
 		j = -1;
 		ft_putstr("\033[34m ");
-		while (++j < (6 - ft_numlen(t_c->s_a[i])))
-			ft_putchar(' ');
+		if (t_c->s_a[i] == 0)
+			simple_printf("     ");
+		else
+			while (++j < (6 - ft_numlen(t_c->s_a[i])))
+				ft_putchar(' ');
 		if (i < t_c->size_a)
 			ft_putnbr(t_c->s_a[i]);
 		else
@@ -50,12 +54,11 @@ void print_stacks(t_checker *t_c)
 	ft_putchar('\n');
 }
 
-
 void trim(char **str)
 {
-	int		i;
-	int		j;
-	char	*tmp;
+	int i;
+	int j;
+	char *tmp;
 
 	i = 0;
 	tmp = *str;
@@ -102,9 +105,9 @@ void init_moves(t_moves **tmp)
 	(*tmp + 10)->name = "rrr";
 }
 
-int		make_move(char *str, t_moves *tmp, t_checker **t_c)
+int make_move(char *str, t_moves *tmp, t_checker **t_c)
 {
-	int		i;
+	int i;
 
 	i = -1;
 	while (++i < 11)
@@ -118,11 +121,9 @@ int		make_move(char *str, t_moves *tmp, t_checker **t_c)
 	return (0);
 }
 
-
-
 void proccess_input(char *line, t_checker *t_c)
 {
-	t_moves		*m;
+	t_moves *m;
 
 	init_moves(&m);
 	if (!make_move(line, m, &t_c))
@@ -130,7 +131,7 @@ void proccess_input(char *line, t_checker *t_c)
 		free(t_c->s_a);
 		free(t_c->s_b);
 		free(m);
-		simple_printf(B_RED"Error\n"RESET);
+		simple_printf(B_RED "Error\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	free(m);
@@ -138,34 +139,29 @@ void proccess_input(char *line, t_checker *t_c)
 
 int main(int ac, char **av)
 {
-	t_checker	t_c;
-	char		*line;
-	int			line_nbr;
+	t_checker t_c;
+	char *line;
+	int line_nbr;
 
-
-	normalize_argv(&ac, &av);
-	t_c.size_a = ac;
-	t_c.size_b = 0;
-	line_nbr = 0;
-	build_stacks(&t_c, &av, ac);
-	free_double_arr((void ***)&av);
-	for (int i = 0; i < t_c.size_a; i++)
+	if (ac > 1)
 	{
-		printf("%d ", t_c.srtd[i]);
+		normalize_argv(&ac, &av);
+		t_c.size_a = ac;
+		t_c.size_b = 0;
+		line_nbr = 0;
+		build_stacks(&t_c, &av, ac);
+		free_double_arr((void ***)&av);
+		while (get_next_line(0, &line))
+		{
+			if (ft_strcmp(line, ""))
+				proccess_input(line, &t_c);
+			print_stacks(&t_c);
+			free(line);
+		}
+		simple_printf((check_sorted(t_c)) ? B_GREEN "OK\n" RESET : B_RED "KO\n" RESET);
+		free(t_c.s_a);
+		free(t_c.s_b);
+		free(t_c.srtd);
 	}
-	printf("\n");
-
-	while (get_next_line(0, &line))
-	{
-		trim(&line);
-		if (ft_strcmp(line, ""))
-			proccess_input(line, &t_c);
-		print_stacks(&t_c);
-		free(line);
-	}
-	simple_printf((check_sorted(t_c)) ? B_GREEN"OK\n"RESET : B_RED"KO\n"RESET);
-	free(t_c.s_a);
-	free(t_c.s_b);
-	free(t_c.srtd);
 	return 0;
 }
