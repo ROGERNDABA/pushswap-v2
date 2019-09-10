@@ -6,17 +6,24 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 10:42:28 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 15:02:44 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/10 19:36:29 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/libft.h"
 
-int	ft_numlen(int n)
+int ft_numlen(int n)
 {
-	int		len;
+	int len;
 
 	len = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+	{
+		len++;
+		n *= -1;
+	}
 	while (n > 0)
 	{
 		n /= 10;
