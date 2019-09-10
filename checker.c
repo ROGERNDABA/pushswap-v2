@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:40 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/10 19:51:16 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/10 20:02:18 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,23 @@ void print_stacks(t_checker *t_c)
 
 	i = 0;
 	simple_printf(CYAN "     stack a " RED "| " GREEN "stack b\n");
-	simple_printf(RED "---------------------------" RESET "\n");
+	simple_printf(RED "---------------------------" CYAN "\n");
 	while (i < t_c->size_a || i < t_c->size_b)
 	{
 		j = -1;
-		ft_putstr("\033[34m ");
-		while (++j < (11 - ft_numlen(t_c->s_a[i])))
+		while (++j < (12 - ft_numlen(t_c->s_a[i])))
 			ft_putchar(' ');
 		if (i < t_c->size_a)
 			ft_putnbr(t_c->s_a[i]);
 		else
-			ft_putchar(' ');
+			simple_printf("  ");
 		ft_putstr("\033[31m | \033[32m");
 		if (i < t_c->size_b)
 			ft_putnbr(t_c->s_b[i]);
-		ft_putstr("\n\033[0m");
+		simple_printf(CYAN "\n");
 		i++;
 	}
-	ft_putchar('\n');
+	simple_printf(RESET "\n");
 }
 
 void trim(char **str)
