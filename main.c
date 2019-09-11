@@ -99,7 +99,7 @@ void step_1(t_checker *t_c)
 				ra(&(*t_c), 1);
 			// simple_print(&(*t_c));
 		}
-		// simple_print(&(*t_c));
+		simple_print(&(*t_c));
 	}
 	else
 	{
