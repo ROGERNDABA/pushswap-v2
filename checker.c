@@ -6,12 +6,12 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:40 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/10 20:02:18 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/12 20:21:26 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <global.h>
+#include <stdio.h>
 
 void simple_print(t_checker *t_c)
 {

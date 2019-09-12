@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:27 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/10 19:17:15 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/12 20:21:03 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int in_chunk(t_checker *t_c, int val)
 void step_1(t_checker *t_c)
 {
 	static int track;
+
 	if (!check_sorted(*t_c))
 	{
 		while (t_c->size_b < t_c->size / t_c->ftc)
