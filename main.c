@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:27 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/12 20:21:03 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/12 20:57:17 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@ void simple_print(t_checker *t_c)
 	for (size_t i = 0; i < t_c->size_b; i++)
 		printf(" %d", t_c->s_b[i]);
 	printf("\033[0m\n\n");
-}
-
-int dist(int *arr, int size, int value)
-{
-	int i;
-
-	i = -1;
-	while (++i < size)
-		if (arr[i] == value)
-			break;
-	if (i == size)
-		return (1);
-	return ((i >= (size / 2)) ? 1 : 0);
 }
 
 int lowest(int *arr, int size)
@@ -86,6 +73,87 @@ int in_chunk(t_checker *t_c, int val)
 	return (0);
 }
 
+
+int		dist(int *arr, int size, int val)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		if (arr[i] == val)
+			break;
+	return ((i < size / 2) ? i : size - i);
+}
+
+int		side(int *arr, int size, int val)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		if (arr[i] == val)
+			break;
+	return ((i < size / 2) ? 0 : 1);
+}
+
+void do_low(t_checker *t_c, int low)
+{
+	while (*(t_c->s_b) != low)
+		rb(&(*t_c), 1);
+	pa(&(*t_c), 1);
+	ra(&(*t_c), 1);
+}
+
+void do_low_r(t_checker *t_c, int low)
+{
+	while (*(t_c->s_b) != low)
+		rrb(&(*t_c), 1);
+	pa(&(*t_c), 1);
+	ra(&(*t_c), 1);
+}
+
+void do_high(t_checker *t_c, int high)
+{
+	while (*(t_c->s_b) != high)
+		rb(&(*t_c), 1);
+	pa(&(*t_c), 1);
+}
+
+void do_high_r(t_checker *t_c, int high)
+{
+	while (*(t_c->s_b) != high)
+		rrb(&(*t_c), 1);
+	pa(&(*t_c), 1);
+}
+
+void step_2(t_checker *t_c)
+{
+	int		l;
+	int		ld;
+	int		h;
+	int		hd;
+
+	l = lowest(t_c->s_b, t_c->size_b);
+	ld = dist(t_c->s_b, t_c->size_b, l);
+	h = highest(t_c->s_b, t_c->size_b);
+	hd = dist(t_c->s_b, t_c->size_b, h);
+	if (ld <= hd)
+	{
+		if (!side(t_c->s_b, t_c->size_b, l))
+			do_low(&(*t_c), l);
+		else
+			do_low_r(&(*t_c), l);
+	}
+	else
+		if (!side(t_c->s_b, t_c->size_b, l))
+			do_high(&(*t_c), h);
+		else
+			do_high_r(&(*t_c), h);
+	simple_print(t_c);
+	if (t_c->size_b > 0)
+		step_2(&(*t_c));
+}
+
 void step_1(t_checker *t_c)
 {
 	static int track;
@@ -100,6 +168,7 @@ void step_1(t_checker *t_c)
 				ra(&(*t_c), 1);
 			// simple_print(&(*t_c));
 		}
+		step_2(&(*t_c));
 		// simple_print(&(*t_c));
 	}
 	else
