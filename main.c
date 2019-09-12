@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:27 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/12 21:02:51 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/12 21:27:39 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void do_high(t_checker *t_c, int high)
 	while (*(t_c->s_b) != high)
 		rb(&(*t_c), 1);
 	pa(&(*t_c), 1);
+	if (t_c->s_a[0] > t_c->s_a[1])
+		sa(&(*t_c), 1);
 }
 
 void do_high_r(t_checker *t_c, int high)
@@ -124,6 +126,37 @@ void do_high_r(t_checker *t_c, int high)
 	while (*(t_c->s_b) != high)
 		rrb(&(*t_c), 1);
 	pa(&(*t_c), 1);
+	if (t_c->s_a[0] > t_c->s_a[1])
+		sa(&(*t_c), 1);
+}
+
+int is_next(int *arr, int size, int i1, int i2)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+	{
+		if (arr[i] == i1)
+			break;
+	}
+	return ((arr[i + 1] == i2) ? 1 : 0);
+}
+
+void do_next(t_checker *t_c)
+{
+	int		i1;
+	int		i2;
+
+	i1 = t_c->s_a[t_c->size_a - 1];
+	i2 = t_c->s_a[0];
+	while (is_next(t_c->srtd, t_c->size, i1, i2))
+	{
+		ra(&(*t_c), 1);
+		i1 = t_c->s_a[t_c->size_a - 1];
+		i2 = t_c->s_a[0];
+	}
+	// simple_print(t_c);
 }
 
 void step_1_1(t_checker *t_c)
@@ -149,9 +182,11 @@ void step_1_1(t_checker *t_c)
 			do_high(&(*t_c), h);
 		else
 			do_high_r(&(*t_c), h);
-	simple_print(t_c);
+// simple_print(t_c);
 	if (t_c->size_b > 0)
 		step_1_1(&(*t_c));
+	else
+		do_next(&(*t_c));
 }
 
 void step_1(t_checker *t_c)
@@ -189,12 +224,7 @@ int main(int ac, char **av)
 		build_stacks(&t_c, &av, ac);
 		get_factor(&t_c);
 
-		static int track = 9;
-		printf("----->A %p\n", t_c.s_a);
-		printf("----->B %p\n", t_c.s_b);
 		step_1(&t_c);
-		printf("----->A %p\n", t_c.s_a);
-		printf("----->B %p\n", t_c.s_b);
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);
 		free(t_c.s_b);
