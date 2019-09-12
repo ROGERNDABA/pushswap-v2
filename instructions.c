@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instructions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmdaba <rogerndaba@gmil.com>               +#+  +:+       +#+        */
+/*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:02:13 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/08/21 18:50:11 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/12 21:05:25 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	pa(t_checker *t_c, int flag)
 
 	if (t_c->size_b > 0)
 	{
-		i = t_c->size_a + 2;
+		i = t_c->size_a + 1;
 		while (--i > 0)
 			t_c->s_a[i] = t_c->s_a[i - 1];
 		t_c->s_a[0] = t_c->s_b[0];
@@ -74,7 +74,7 @@ void	pb(t_checker *t_c, int flag)
 
 	if (t_c->size_a > 0)
 	{
-		i = t_c->size_b + 2;
+		i = t_c->size_b + 1;
 		while (--i > 0)
 			t_c->s_b[i] = t_c->s_b[i - 1];
 		t_c->s_b[0] = t_c->s_a[0];

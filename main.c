@@ -6,7 +6,7 @@
 /*   By: rmdaba <rogerndaba@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:08:27 by rmdaba            #+#    #+#             */
-/*   Updated: 2019/09/12 20:57:17 by rmdaba           ###   ########.fr       */
+/*   Updated: 2019/09/12 21:02:51 by rmdaba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void do_high_r(t_checker *t_c, int high)
 	pa(&(*t_c), 1);
 }
 
-void step_2(t_checker *t_c)
+void step_1_1(t_checker *t_c)
 {
 	int		l;
 	int		ld;
@@ -151,7 +151,7 @@ void step_2(t_checker *t_c)
 			do_high_r(&(*t_c), h);
 	simple_print(t_c);
 	if (t_c->size_b > 0)
-		step_2(&(*t_c));
+		step_1_1(&(*t_c));
 }
 
 void step_1(t_checker *t_c)
@@ -168,7 +168,7 @@ void step_1(t_checker *t_c)
 				ra(&(*t_c), 1);
 			// simple_print(&(*t_c));
 		}
-		step_2(&(*t_c));
+		step_1_1(&(*t_c));
 		// simple_print(&(*t_c));
 	}
 	else
@@ -190,8 +190,11 @@ int main(int ac, char **av)
 		get_factor(&t_c);
 
 		static int track = 9;
+		printf("----->A %p\n", t_c.s_a);
+		printf("----->B %p\n", t_c.s_b);
 		step_1(&t_c);
-		// simple_print(&t_c);
+		printf("----->A %p\n", t_c.s_a);
+		printf("----->B %p\n", t_c.s_b);
 		free_double_arr((void ***)&av);
 		free(t_c.s_a);
 		free(t_c.s_b);
